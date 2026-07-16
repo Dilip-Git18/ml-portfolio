@@ -3,25 +3,41 @@
    ========================================================================= */
 :root {
   --color-primary: #2563EB;
+  --color-primary-dim: #1d4ed8;
   --color-accent: #10B981;
   --color-text: #1F2937;
+  --color-muted: #6B7280;
   --color-bg: #F9FAFB;
   --color-bg-alt: #F3F4F6;
+  --color-surface: #FFFFFF;
   --color-border: #E5E7EB;
-  --color-muted: #6B7280;
-  --color-white: #FFFFFF;
+  --color-tag-bg: #EFF6FF;
 
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
 
   --shadow-sm: 0 1px 3px rgba(31, 41, 55, 0.06), 0 1px 2px rgba(31, 41, 55, 0.04);
-  --shadow-md: 0 8px 24px rgba(31, 41, 55, 0.08);
+  --shadow-md: 0 8px 24px rgba(31, 41, 55, 0.10);
+  --shadow-lg: 0 20px 48px rgba(31, 41, 55, 0.14);
 
   --transition: 0.25s ease;
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark theme overrides — applied via [data-theme="dark"] on <html> */
+[data-theme="dark"] {
+  --color-text: #E5E7EB;
+  --color-muted: #9CA3AF;
+  --color-bg: #0F172A;
+  --color-bg-alt: #131F35;
+  --color-surface: #16213B;
+  --color-border: #253150;
+  --color-tag-bg: #16264A;
 }
 
 * {
@@ -40,6 +56,8 @@ body {
   background-color: var(--color-bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition), color var(--transition);
+  overflow-x: hidden;
 }
 
 img {
@@ -56,6 +74,10 @@ ul {
   list-style: none;
 }
 
+button {
+  font-family: inherit;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -67,10 +89,12 @@ h1, h2, h3, h4 {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
 }
 
 .section {
   padding: 96px 0;
+  position: relative;
 }
 
 .section-alt {
@@ -78,8 +102,9 @@ h1, h2, h3, h4 {
 }
 
 .section-eyebrow {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -88,7 +113,21 @@ h1, h2, h3, h4 {
 
 .section-title {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  margin-bottom: 40px;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+  margin-top: -4px;
+}
+
+.section-title + .skills-filters,
+.section-title + .about-grid,
+.section-title + .timeline,
+.section-title + .contact-intro {
+  margin-top: 24px;
 }
 
 /* Focus visibility for accessibility */
@@ -96,6 +135,17 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 /* =========================================================================
@@ -115,11 +165,11 @@ button:focus-visible {
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: #FFFFFF;
 }
 
 .btn-primary:hover {
-  background-color: #1d4ed8;
+  background-color: var(--color-primary-dim);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -132,31 +182,43 @@ button:focus-visible {
 
 .btn-outline:hover {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: #FFFFFF;
   transform: translateY(-2px);
 }
 
 .btn-github {
   background-color: var(--color-text);
-  color: var(--color-white);
+  color: var(--color-bg);
   font-size: 0.85rem;
   padding: 10px 20px;
   margin-top: 8px;
 }
 
 .btn-github:hover {
-  background-color: #111827;
+  opacity: 0.85;
   transform: translateY(-2px);
 }
 
 /* =========================================================================
    3. HEADER / NAVIGATION
    ========================================================================= */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  z-index: 200;
+  transition: width 0.1s linear;
+}
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(249, 250, 251, 0.9);
+  background-color: var(--color-bg); /* fallback for browsers without color-mix() */
+  background-color: color-mix(in srgb, var(--color-bg) 88%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -168,6 +230,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .logo {
@@ -179,16 +242,19 @@ button:focus-visible {
 
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 28px;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-link {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--color-text);
   position: relative;
   padding: 4px 0;
   transition: color var(--transition);
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -210,6 +276,30 @@ button:focus-visible {
 .nav-link:hover::after,
 .nav-link.active::after {
   width: 100%;
+}
+
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), border-color var(--transition);
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+  border-color: var(--color-primary);
+}
+
+.theme-icon {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 /* Mobile menu toggle (hamburger) */
@@ -250,32 +340,70 @@ button:focus-visible {
    4. HERO SECTION
    ========================================================================= */
 .hero {
-  padding-top: 140px;
-  padding-bottom: 120px;
+  padding-top: 120px;
+  padding-bottom: 90px;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.neural-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
 }
 
 .hero-content {
-  max-width: 700px;
+  max-width: 620px;
 }
 
 .hero-eyebrow {
-  font-size: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--color-accent);
   margin-bottom: 12px;
 }
 
 .hero-name {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
   margin-bottom: 8px;
   color: var(--color-text);
+  letter-spacing: -0.01em;
 }
 
 .hero-role {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
   color: var(--color-primary);
   font-weight: 600;
   margin-bottom: 20px;
+  font-family: var(--font-mono);
+  min-height: 1.6em;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  color: var(--color-accent);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 .hero-headline {
@@ -289,6 +417,78 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.stat-chip {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.stat-chip:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.scroll-hint span {
+  display: block;
+  width: 22px;
+  height: 36px;
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-hint span::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  animation: scrollDot 1.6s ease infinite;
+}
+
+@keyframes scrollDot {
+  0% { opacity: 1; top: 6px; }
+  70% { opacity: 0; top: 18px; }
+  100% { opacity: 0; top: 6px; }
 }
 
 /* =========================================================================
@@ -312,11 +512,17 @@ button:focus-visible {
 }
 
 .about-card {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 24px;
   box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .about-card h3 {
@@ -333,34 +539,79 @@ button:focus-visible {
 }
 
 /* =========================================================================
-   6. PROJECTS SECTION
+   6. PROJECTS SECTION (expandable cards)
    ========================================================================= */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 28px;
+  align-items: start;
 }
 
 .project-card {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 28px;
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition), box-shadow var(--transition);
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .project-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 
+.project-summary {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  color: inherit;
+}
+
 .project-title {
-  font-size: 1.15rem;
-  margin-bottom: 16px;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
   color: var(--color-text);
+}
+
+.expand-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  transition: transform var(--transition), background-color var(--transition);
+}
+
+.project-summary[aria-expanded="true"] .expand-icon {
+  transform: rotate(45deg);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.project-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+  padding: 0 28px;
+}
+
+.project-body.open {
+  max-height: 600px;
+  padding-bottom: 28px;
 }
 
 .project-detail {
@@ -369,8 +620,9 @@ button:focus-visible {
 
 .project-label {
   display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-primary);
@@ -390,17 +642,48 @@ button:focus-visible {
 }
 
 .tag {
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 500;
-  background-color: #EFF6FF;
+  background-color: var(--color-tag-bg);
   color: var(--color-primary);
   padding: 4px 12px;
   border-radius: 999px;
 }
 
 /* =========================================================================
-   7. SKILLS SECTION
+   7. SKILLS SECTION (filterable)
    ========================================================================= */
+.skills-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.filter-btn {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -408,7 +691,7 @@ button:focus-visible {
 }
 
 .skill-card {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 18px;
@@ -416,7 +699,7 @@ button:focus-visible {
   font-weight: 500;
   font-size: 0.95rem;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--transition), box-shadow var(--transition), color var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), color var(--transition), opacity var(--transition);
 }
 
 .skill-card:hover {
@@ -425,8 +708,63 @@ button:focus-visible {
   color: var(--color-primary);
 }
 
+.skill-card.hidden {
+  display: none;
+}
+
 /* =========================================================================
-   8. CONTACT SECTION
+   8. JOURNEY / TIMELINE SECTION
+   ========================================================================= */
+.timeline {
+  position: relative;
+  max-width: 700px;
+  padding-left: 32px;
+  border-left: 2px solid var(--color-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -39px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-bg-alt);
+  border: 2px solid var(--color-primary);
+}
+
+.timeline-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.timeline-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  max-width: 520px;
+}
+
+/* =========================================================================
+   9. CONTACT SECTION
    ========================================================================= */
 .contact-intro {
   font-size: 1.05rem;
@@ -448,11 +786,13 @@ button:focus-visible {
   gap: 10px;
   font-weight: 500;
   font-size: 0.95rem;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   padding: 12px 20px;
   border-radius: var(--radius-sm);
   transition: transform var(--transition), box-shadow var(--transition), color var(--transition);
+  color: var(--color-text);
+  cursor: pointer;
 }
 
 .contact-item:hover {
@@ -466,7 +806,7 @@ button:focus-visible {
 }
 
 /* =========================================================================
-   9. FOOTER
+   10. FOOTER
    ========================================================================= */
 .site-footer {
   border-top: 1px solid var(--color-border);
@@ -509,7 +849,7 @@ button:focus-visible {
 }
 
 /* =========================================================================
-   10. BACK TO TOP BUTTON
+   11. BACK TO TOP BUTTON
    ========================================================================= */
 .back-to-top {
   position: fixed;
@@ -519,7 +859,7 @@ button:focus-visible {
   height: 44px;
   border-radius: 50%;
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: #FFFFFF;
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
@@ -527,7 +867,7 @@ button:focus-visible {
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition), background-color var(--transition);
   z-index: 90;
 }
 
@@ -538,11 +878,11 @@ button:focus-visible {
 }
 
 .back-to-top:hover {
-  background-color: #1d4ed8;
+  background-color: var(--color-primary-dim);
 }
 
 /* =========================================================================
-   11. SCROLL REVEAL ANIMATION
+   12. SCROLL REVEAL ANIMATION
    ========================================================================= */
 .reveal {
   opacity: 0;
@@ -556,8 +896,18 @@ button:focus-visible {
 }
 
 /* =========================================================================
-   12. RESPONSIVE / MOBILE STYLES
+   13. RESPONSIVE / MOBILE STYLES
    ========================================================================= */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
@@ -572,7 +922,7 @@ button:focus-visible {
     border-bottom: 1px solid var(--color-border);
     flex-direction: column;
     align-items: flex-start;
-    padding: 16px 24px;
+    padding: 0 24px;
     gap: 18px;
     max-height: 0;
     overflow: hidden;
@@ -580,12 +930,16 @@ button:focus-visible {
   }
 
   .nav-links.open {
-    max-height: 320px;
+    max-height: 360px;
     padding: 20px 24px;
   }
 
   .about-columns {
     grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .section {
@@ -594,7 +948,16 @@ button:focus-visible {
 
   .hero {
     padding-top: 110px;
-    padding-bottom: 80px;
+    padding-bottom: 70px;
+    min-height: auto;
+  }
+
+  .timeline {
+    padding-left: 26px;
+  }
+
+  .timeline-marker {
+    left: -33px;
   }
 }
 
@@ -605,6 +968,10 @@ button:focus-visible {
 
   .btn {
     text-align: center;
+    width: 100%;
+  }
+
+  .contact-item {
     width: 100%;
   }
 }

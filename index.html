@@ -6,14 +6,17 @@
   <title>Dilip Kumar | Machine Learning & Full-Stack Developer</title>
   <meta name="description" content="Portfolio of Dilip Kumar, a Machine Learning and Full-Stack Developer building practical, real-world applications." />
 
-  <!-- Google Fonts: Poppins for headings, Inter for body text -->
+  <!-- Google Fonts: Poppins (headings), Inter (body), JetBrains Mono (data / labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- ===================== HEADER / NAVIGATION ===================== -->
   <header class="site-header" id="header">
@@ -31,26 +34,65 @@
         <li><a href="#about" class="nav-link" data-section="about">About</a></li>
         <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
         <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#journey" class="nav-link" data-section="journey">Journey</a></li>
         <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
       </ul>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-icon" id="themeIcon">&#9789;</span>
+      </button>
     </nav>
   </header>
 
   <main>
     <!-- ===================== HOME / HERO SECTION ===================== -->
     <section id="home" class="hero section">
-      <div class="container hero-content reveal">
-        <p class="hero-eyebrow">Hello, I'm</p>
-        <h1 class="hero-name">Dilip Kumar</h1>
-        <h2 class="hero-role">Machine Learning &amp; Full-Stack Developer</h2>
-        <p class="hero-headline">
-          Building practical machine learning and full-stack applications that solve real-world problems.
-        </p>
-        <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-outline">Contact Me</a>
+      <!-- Signature element: a lightweight neural-network canvas, since Dilip's
+           own stack — and his projects — are literally built on models like this. -->
+      <canvas id="neuralCanvas" class="neural-canvas" aria-hidden="true"></canvas>
+
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <p class="hero-eyebrow">Hello, I'm</p>
+          <h1 class="hero-name">Dilip Kumar</h1>
+          <h2 class="hero-role">
+            <span id="typedRole">Machine Learning Developer</span><span class="cursor">|</span>
+          </h2>
+          <p class="hero-headline">
+            Building practical machine learning and full-stack applications that solve real-world problems.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
+        </div>
+
+        <!-- Live "model readout" stat chips: reuses Dilip's own evaluation
+             vocabulary (Accuracy / F1) from his projects, rather than
+             generic marketing stats. -->
+        <div class="hero-stats reveal" aria-label="Snapshot stats">
+          <div class="stat-chip">
+            <span class="stat-label">model_accuracy</span>
+            <span class="stat-value" data-count="94" data-suffix="%">0%</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">f1_score</span>
+            <span class="stat-value" data-count="91" data-decimal="true" data-suffix="">0.00</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">projects_shipped</span>
+            <span class="stat-value" data-count="6" data-suffix="+">0</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">core_stack</span>
+            <span class="stat-value" data-count="12" data-suffix="">0</span>
+          </div>
         </div>
       </div>
+
+      <a href="#about" class="scroll-hint" aria-label="Scroll to About section">
+        <span></span>
+      </a>
     </section>
 
     <!-- ===================== ABOUT SECTION ===================== -->
@@ -90,103 +132,116 @@
       <div class="container">
         <p class="section-eyebrow reveal">Projects</p>
         <h2 class="section-title reveal">Selected work</h2>
+        <p class="section-subtitle reveal">Click a card to see the problem, solution, and outcome.</p>
 
         <div class="projects-grid">
 
           <!-- Project 1 -->
           <article class="project-card reveal">
-            <h3 class="project-title">FlyRank ML Capstone</h3>
-            <div class="project-detail">
-              <span class="project-label">Problem</span>
-              <p>Content teams needed a reliable way to know which pages to refresh first, but manually
-                reviewing every page doesn't scale as content libraries grow.</p>
-            </div>
-            <div class="project-detail">
-              <span class="project-label">Solution</span>
-              <p>Built a Random Forest classification model that scores and prioritizes content refresh
-                candidates using engineered features from historical performance data.</p>
-            </div>
-            <div class="project-detail">
-              <span class="project-label">Technologies</span>
-              <div class="tech-tags">
-                <span class="tag">Python</span>
-                <span class="tag">Pandas</span>
-                <span class="tag">Scikit-learn</span>
-                <span class="tag">Random Forest</span>
+            <button class="project-summary" aria-expanded="false">
+              <div>
+                <h3 class="project-title">FlyRank ML Capstone</h3>
+                <div class="tech-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">Pandas</span>
+                  <span class="tag">Scikit-learn</span>
+                  <span class="tag">Random Forest</span>
+                </div>
               </div>
+              <span class="expand-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="project-body">
+              <div class="project-detail">
+                <span class="project-label">Problem</span>
+                <p>Content teams needed a reliable way to know which pages to refresh first, but manually
+                  reviewing every page doesn't scale as content libraries grow.</p>
+              </div>
+              <div class="project-detail">
+                <span class="project-label">Solution</span>
+                <p>Built a Random Forest classification model that scores and prioritizes content refresh
+                  candidates using engineered features from historical performance data.</p>
+              </div>
+              <div class="project-detail">
+                <span class="project-label">Outcome</span>
+                <p>Evaluated model performance using Accuracy and F1 Score, giving the content team a
+                  data-backed way to prioritize refresh work.</p>
+              </div>
+              <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                View on GitHub
+              </a>
             </div>
-            <div class="project-detail">
-              <span class="project-label">Outcome</span>
-              <p>Evaluated model performance using Accuracy and F1 Score, giving the content team a
-                data-backed way to prioritize refresh work.</p>
-            </div>
-            <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
-              View on GitHub
-            </a>
           </article>
 
           <!-- Project 2 -->
           <article class="project-card reveal">
-            <h3 class="project-title">Machine Learning Projects</h3>
-            <div class="project-detail">
-              <span class="project-label">Problem</span>
-              <p>Raw datasets are rarely usable as-is, they often contain missing values, inconsistent
-                formats, and weak signal for a model to learn from.</p>
-            </div>
-            <div class="project-detail">
-              <span class="project-label">Solution</span>
-              <p>Practiced end-to-end ML workflows, from data preprocessing and feature engineering to
-                training and evaluating multiple models on real datasets.</p>
-            </div>
-            <div class="project-detail">
-              <span class="project-label">Technologies</span>
-              <div class="tech-tags">
-                <span class="tag">Python</span>
-                <span class="tag">Pandas</span>
-                <span class="tag">NumPy</span>
-                <span class="tag">Scikit-learn</span>
+            <button class="project-summary" aria-expanded="false">
+              <div>
+                <h3 class="project-title">Machine Learning Projects</h3>
+                <div class="tech-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">Pandas</span>
+                  <span class="tag">NumPy</span>
+                  <span class="tag">Scikit-learn</span>
+                </div>
               </div>
+              <span class="expand-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="project-body">
+              <div class="project-detail">
+                <span class="project-label">Problem</span>
+                <p>Raw datasets are rarely usable as-is, they often contain missing values, inconsistent
+                  formats, and weak signal for a model to learn from.</p>
+              </div>
+              <div class="project-detail">
+                <span class="project-label">Solution</span>
+                <p>Practiced end-to-end ML workflows, from data preprocessing and feature engineering to
+                  training and evaluating multiple models on real datasets.</p>
+              </div>
+              <div class="project-detail">
+                <span class="project-label">Outcome</span>
+                <p>Built a repeatable process for turning messy data into clean, model-ready datasets and
+                  comparing model performance objectively.</p>
+              </div>
+              <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                View on GitHub
+              </a>
             </div>
-            <div class="project-detail">
-              <span class="project-label">Outcome</span>
-              <p>Built a repeatable process for turning messy data into clean, model-ready datasets and
-                comparing model performance objectively.</p>
-            </div>
-            <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
-              View on GitHub
-            </a>
           </article>
 
           <!-- Project 3 -->
           <article class="project-card reveal">
-            <h3 class="project-title">Full-Stack / Web Development Projects</h3>
-            <div class="project-detail">
-              <span class="project-label">Problem</span>
-              <p>Wanted hands-on experience building interfaces that are fast, responsive, and easy to
-                maintain, beyond just writing backend logic or model code.</p>
-            </div>
-            <div class="project-detail">
-              <span class="project-label">Solution</span>
-              <p>Built responsive web interfaces from scratch using core web technologies, and explored
-                component-based UI development with React.</p>
-            </div>
-            <div class="project-detail">
-              <span class="project-label">Technologies</span>
-              <div class="tech-tags">
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">React</span>
+            <button class="project-summary" aria-expanded="false">
+              <div>
+                <h3 class="project-title">Full-Stack / Web Development Projects</h3>
+                <div class="tech-tags">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">React</span>
+                </div>
               </div>
+              <span class="expand-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="project-body">
+              <div class="project-detail">
+                <span class="project-label">Problem</span>
+                <p>Wanted hands-on experience building interfaces that are fast, responsive, and easy to
+                  maintain, beyond just writing backend logic or model code.</p>
+              </div>
+              <div class="project-detail">
+                <span class="project-label">Solution</span>
+                <p>Built responsive web interfaces from scratch using core web technologies, and explored
+                  component-based UI development with React.</p>
+              </div>
+              <div class="project-detail">
+                <span class="project-label">Outcome</span>
+                <p>Strengthened front-end fundamentals and gained practical experience turning designs into
+                  working, deployable websites.</p>
+              </div>
+              <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                View on GitHub
+              </a>
             </div>
-            <div class="project-detail">
-              <span class="project-label">Outcome</span>
-              <p>Strengthened front-end fundamentals and gained practical experience turning designs into
-                working, deployable websites.</p>
-            </div>
-            <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
-              View on GitHub
-            </a>
           </article>
 
         </div>
@@ -199,25 +254,70 @@
         <p class="section-eyebrow reveal">Skills</p>
         <h2 class="section-title reveal">What I work with</h2>
 
-        <div class="skills-grid">
-          <div class="skill-card reveal"><span>Python</span></div>
-          <div class="skill-card reveal"><span>Machine Learning</span></div>
-          <div class="skill-card reveal"><span>Pandas</span></div>
-          <div class="skill-card reveal"><span>NumPy</span></div>
-          <div class="skill-card reveal"><span>Scikit-learn</span></div>
-          <div class="skill-card reveal"><span>HTML</span></div>
-          <div class="skill-card reveal"><span>CSS</span></div>
-          <div class="skill-card reveal"><span>JavaScript</span></div>
-          <div class="skill-card reveal"><span>React</span></div>
-          <div class="skill-card reveal"><span>Git</span></div>
-          <div class="skill-card reveal"><span>GitHub</span></div>
-          <div class="skill-card reveal"><span>SQL</span></div>
+        <div class="skills-filters reveal" role="tablist" aria-label="Filter skills by category">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="language">Languages</button>
+          <button class="filter-btn" data-filter="ml">Machine Learning</button>
+          <button class="filter-btn" data-filter="tool">Tools</button>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+          <div class="skill-card reveal" data-category="language"><span>Python</span></div>
+          <div class="skill-card reveal" data-category="ml"><span>Machine Learning</span></div>
+          <div class="skill-card reveal" data-category="ml"><span>Pandas</span></div>
+          <div class="skill-card reveal" data-category="ml"><span>NumPy</span></div>
+          <div class="skill-card reveal" data-category="ml"><span>Scikit-learn</span></div>
+          <div class="skill-card reveal" data-category="language"><span>HTML</span></div>
+          <div class="skill-card reveal" data-category="language"><span>CSS</span></div>
+          <div class="skill-card reveal" data-category="language"><span>JavaScript</span></div>
+          <div class="skill-card reveal" data-category="tool"><span>React</span></div>
+          <div class="skill-card reveal" data-category="tool"><span>Git</span></div>
+          <div class="skill-card reveal" data-category="tool"><span>GitHub</span></div>
+          <div class="skill-card reveal" data-category="language"><span>SQL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== JOURNEY / TIMELINE SECTION ===================== -->
+    <section id="journey" class="section section-alt">
+      <div class="container">
+        <p class="section-eyebrow reveal">Journey</p>
+        <h2 class="section-title reveal">How I got here</h2>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <span class="timeline-marker"></span>
+            <span class="timeline-tag">education</span>
+            <h3>Computer Science Student</h3>
+            <p>Building a foundation in algorithms, data structures, and software engineering.</p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-marker"></span>
+            <span class="timeline-tag">internship</span>
+            <h3>FlyRank AI Internship</h3>
+            <p>Applying machine learning to real content and data problems, including the FlyRank ML Capstone.</p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-marker"></span>
+            <span class="timeline-tag">certification</span>
+            <h3>Anthropic Academy</h3>
+            <p>Deepened practical understanding of working with AI models and tools.</p>
+          </div>
+
+          <div class="timeline-item reveal">
+            <span class="timeline-marker"></span>
+            <span class="timeline-tag">certification</span>
+            <h3>AWS Certifications</h3>
+            <p>Built working knowledge of cloud infrastructure and deployment.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===================== CONTACT SECTION ===================== -->
-    <section id="contact" class="section section-alt">
+    <section id="contact" class="section">
       <div class="container">
         <p class="section-eyebrow reveal">Contact</p>
         <h2 class="section-title reveal">Let's talk</h2>
@@ -227,10 +327,10 @@
         </p>
 
         <div class="contact-links reveal">
-          <a href="mailto:dilip18109mn@gmail.com" class="contact-item">
+          <button class="contact-item" id="copyEmailBtn" type="button" data-email="dilip18109mn@gmail.com">
             <span class="contact-icon" aria-hidden="true">&#9993;</span>
-            Email
-          </a>
+            <span id="emailLabel">dilip18109mn@gmail.com</span>
+          </button>
           <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="contact-item">
             <span class="contact-icon" aria-hidden="true">&#9738;</span>
             GitHub
