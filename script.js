@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------------------------------------------------------------------
      6. TYPING EFFECT FOR HERO ROLE
-     Cycles through Dilip's two roles, typing and deleting each one.
+     Cycles through Dilip's roles, typing and deleting each one.
      --------------------------------------------------------------------- */
   const typedRoleEl = document.getElementById("typedRole");
   const roles = ["Machine Learning Developer", "Full-Stack Developer", "Problem Solver"];

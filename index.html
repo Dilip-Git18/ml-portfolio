@@ -34,7 +34,7 @@
         <li><a href="#about" class="nav-link" data-section="about">About</a></li>
         <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
         <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
-        <li><a href="#journey" class="nav-link" data-section="journey">Journey</a></li>
+        <li><a href="#certifications" class="nav-link" data-section="certifications">Certifications</a></li>
         <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
       </ul>
 
@@ -53,13 +53,27 @@
 
       <div class="container hero-grid">
         <div class="hero-content reveal">
+
+          <!-- Avatar: swap in a real photo by adding a file at assets/profile.jpg —
+               the initials badge below shows automatically until then. -->
+          <div class="avatar-wrap">
+            <img
+              src="assets/profile.jpg"
+              alt="Photo of Dilip Kumar"
+              class="avatar-img"
+              onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';"
+            />
+            <div class="avatar-fallback" id="avatarFallback">DK</div>
+          </div>
+
           <p class="hero-eyebrow">Hello, I'm</p>
           <h1 class="hero-name">Dilip Kumar</h1>
           <h2 class="hero-role">
             <span id="typedRole">Machine Learning Developer</span><span class="cursor">|</span>
           </h2>
           <p class="hero-headline">
-            Building practical machine learning and full-stack applications that solve real-world problems.
+            B.Tech CSE student and software engineering student, building practical machine learning and
+            full-stack applications that solve real-world problems.
           </p>
           <div class="hero-buttons">
             <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -103,15 +117,16 @@
 
         <div class="about-grid">
           <p class="about-bio reveal">
-            I am a Computer Science student passionate about Machine Learning, Artificial Intelligence,
-            and Full-Stack Web Development. I enjoy solving real-world problems by building practical
-            applications and continuously improving my technical skills through hands-on projects.
+            I am a B.Tech Computer Science Engineering student and software engineering student passionate
+            about Machine Learning, Artificial Intelligence, and Full-Stack Web Development. I enjoy solving
+            real-world problems by building practical applications and continuously improving my technical
+            skills through hands-on projects.
           </p>
 
           <div class="about-columns">
             <div class="about-card reveal">
               <h3>Education</h3>
-              <p>Computer Science Student</p>
+              <p>B.Tech, Computer Science Engineering</p>
             </div>
 
             <div class="about-card reveal">
@@ -138,6 +153,21 @@
 
           <!-- Project 1 -->
           <article class="project-card reveal">
+            <!-- Screenshot / GIF placeholder — replace the <img> src below with a
+                 real screenshot or short GIF of this project (e.g. assets/flyrank-capstone.png) -->
+            <div class="project-media">
+              <img src="capstone.png" alt="Screenshot of the FlyRank ML Capstone project" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="media-placeholder">
+                <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+                  <rect x="6" y="14" width="52" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                  <circle cx="20" cy="26" r="4" fill="currentColor"/>
+                  <path d="M10 46 L24 32 L34 42 L44 28 L58 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+               
+              </div>
+              <span class="project-date">2026</span>
+            </div>
+
             <button class="project-summary" aria-expanded="false">
               <div>
                 <h3 class="project-title">FlyRank ML Capstone</h3>
@@ -166,14 +196,32 @@
                 <p>Evaluated model performance using Accuracy and F1 Score, giving the content team a
                   data-backed way to prioritize refresh work.</p>
               </div>
-              <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
-                View on GitHub
-              </a>
+              <div class="project-links">
+                <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                  GitHub
+                </a>
+                <a href="https://dilip-git18.github.io/flyrank-ml-internship/" target="_blank" rel="noopener noreferrer" class="btn btn-demo">
+                  Live Demo &#8599;
+                </a>
+              </div>
             </div>
           </article>
 
           <!-- Project 2 -->
           <article class="project-card reveal">
+            <div class="project-media">
+              <img src="ml.png" alt="Screenshot of Machine Learning Projects" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="media-placeholder">
+                <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+                  <rect x="6" y="14" width="52" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                  <circle cx="20" cy="26" r="4" fill="currentColor"/>
+                  <path d="M10 46 L24 32 L34 42 L44 28 L58 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+              </div>
+              <span class="project-date">2025</span>
+            </div>
+
             <button class="project-summary" aria-expanded="false">
               <div>
                 <h3 class="project-title">Machine Learning Projects</h3>
@@ -202,14 +250,32 @@
                 <p>Built a repeatable process for turning messy data into clean, model-ready datasets and
                   comparing model performance objectively.</p>
               </div>
-              <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
-                View on GitHub
-              </a>
+              <div class="project-links">
+                <a href="https://github.com/Dilip-Git18/Ml-Foundations" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                  GitHub
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-demo">
+                  Live Demo &#8599;
+                </a>
+              </div>
             </div>
           </article>
 
           <!-- Project 3 -->
           <article class="project-card reveal">
+            <div class="project-media">
+              <img src="TYPING.png" alt="Screenshot of Full-Stack / Web Development Projects" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="media-placeholder">
+                <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+                  <rect x="6" y="14" width="52" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                  <circle cx="20" cy="26" r="4" fill="currentColor"/>
+                  <path d="M10 46 L24 32 L34 42 L44 28 L58 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+              </div>
+              <span class="project-date">2025</span>
+            </div>
+
             <button class="project-summary" aria-expanded="false">
               <div>
                 <h3 class="project-title">Full-Stack / Web Development Projects</h3>
@@ -238,9 +304,14 @@
                 <p>Strengthened front-end fundamentals and gained practical experience turning designs into
                   working, deployable websites.</p>
               </div>
-              <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
-                View on GitHub
-              </a>
+              <div class="project-links">
+                <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+                  GitHub
+                </a>
+                <a href="https://typing-game-k0pc.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-demo">
+                  Live Demo &#8599;
+                </a>
+              </div>
             </div>
           </article>
 
@@ -278,8 +349,39 @@
       </div>
     </section>
 
+    <!-- ===================== CURRENTLY LEARNING SECTION ===================== -->
+    <section id="learning" class="section section-alt">
+      <div class="container">
+        <p class="section-eyebrow reveal">Currently Learning</p>
+        <h2 class="section-title reveal">What I'm exploring right now</h2>
+
+        <div class="learning-grid">
+          <div class="learning-card reveal">
+            <span class="learning-dot" aria-hidden="true"></span>
+            <h3>LLMs</h3>
+            <p>Understanding how large language models work and how to build with them.</p>
+          </div>
+          <div class="learning-card reveal">
+            <span class="learning-dot" aria-hidden="true"></span>
+            <h3>MCP</h3>
+            <p>Learning the Model Context Protocol for connecting AI models to real tools and data.</p>
+          </div>
+          <div class="learning-card reveal">
+            <span class="learning-dot" aria-hidden="true"></span>
+            <h3>AI Agents</h3>
+            <p>Exploring how to design agents that can plan, use tools, and complete multi-step tasks.</p>
+          </div>
+          <div class="learning-card reveal">
+            <span class="learning-dot" aria-hidden="true"></span>
+            <h3>AWS</h3>
+            <p>Building deeper cloud skills for deploying and scaling applications and ML models.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== JOURNEY / TIMELINE SECTION ===================== -->
-    <section id="journey" class="section section-alt">
+    <section id="journey" class="section">
       <div class="container">
         <p class="section-eyebrow reveal">Journey</p>
         <h2 class="section-title reveal">How I got here</h2>
@@ -288,7 +390,7 @@
           <div class="timeline-item reveal">
             <span class="timeline-marker"></span>
             <span class="timeline-tag">education</span>
-            <h3>Computer Science Student</h3>
+            <h3>B.Tech, Computer Science Engineering</h3>
             <p>Building a foundation in algorithms, data structures, and software engineering.</p>
           </div>
 
@@ -316,8 +418,61 @@
       </div>
     </section>
 
+    <!-- ===================== CERTIFICATIONS SECTION ===================== -->
+    <section id="certifications" class="section section-alt">
+      <div class="container">
+        <p class="section-eyebrow reveal">Certifications</p>
+        <h2 class="section-title reveal">Credentials</h2>
+
+        <div class="cert-grid">
+          <div class="cert-card reveal">
+            <div class="cert-icon" aria-hidden="true">&#127891;</div>
+            <h3>Anthropic Academy</h3>
+            <p>Practical training in working with AI models and tools.</p>
+          </div>
+          <div class="cert-card reveal">
+            <div class="cert-icon" aria-hidden="true">&#128188;</div>
+            <h3>FlyRank AI Internship</h3>
+            <p>Applied machine learning internship building real content-intelligence models.</p>
+          </div>
+          <div class="cert-card reveal">
+            <div class="cert-icon" aria-hidden="true">&#9729;</div>
+            <h3>AWS Certifications</h3>
+            <p>Foundational cloud computing and deployment knowledge on AWS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ACHIEVEMENTS SECTION ===================== -->
+    <section id="achievements" class="section">
+      <div class="container">
+        <p class="section-eyebrow reveal">Achievements</p>
+        <h2 class="section-title reveal">Milestones</h2>
+
+        <ul class="achievements-list">
+          <li class="reveal">
+            <span class="achievement-icon" aria-hidden="true">&#9733;</span>
+            Built and evaluated the FlyRank ML Capstone model, scored with Accuracy and F1 Score.
+          </li>
+          <li class="reveal">
+            <span class="achievement-icon" aria-hidden="true">&#9733;</span>
+            Completed the FlyRank AI Internship, applying ML to real-world content problems.
+          </li>
+          <li class="reveal">
+            <span class="achievement-icon" aria-hidden="true">&#9733;</span>
+            Completed training through Anthropic Academy and earned AWS certifications.
+          </li>
+          <li class="reveal">
+            <span class="achievement-icon" aria-hidden="true">&#9733;</span>
+            Designed and built this portfolio site from scratch with vanilla HTML, CSS, and JavaScript.
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ===================== CONTACT SECTION ===================== -->
-    <section id="contact" class="section">
+    <section id="contact" class="section section-alt">
       <div class="container">
         <p class="section-eyebrow reveal">Contact</p>
         <h2 class="section-title reveal">Let's talk</h2>
@@ -335,13 +490,13 @@
             <span class="contact-icon" aria-hidden="true">&#9738;</span>
             GitHub
           </a>
-          <a href="#" class="contact-item">
+          <a href="https://www.linkedin.com/in/dilip-exp18/" target="_blank" rel="noopener noreferrer" class="contact-item">
             <span class="contact-icon" aria-hidden="true">&#128188;</span>
             LinkedIn
           </a>
         </div>
 
-        <a href="#" class="btn btn-primary resume-btn" download>Download Resume</a>
+        <a href="Dilip.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary resume-btn">View Resume</a>
       </div>
     </section>
   </main>
@@ -354,7 +509,7 @@
       <div class="footer-socials">
         <a href="mailto:dilip18109mn@gmail.com" aria-label="Email">Email</a>
         <a href="https://github.com/Dilip-Git18" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
-        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/dilip-exp18/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
       </div>
     </div>
   </footer>
