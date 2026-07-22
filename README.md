@@ -33,8 +33,7 @@ JavaScript** — no frameworks — and is deployed live on **Vercel**.
 
 ## 📂 GitHub Repository
 
-🔗 **[https://github.com/Dilip-Git18](https://github.com/Dilip-Git18)**
-
+🔗 **[https://github.com/Dilip-Git18/ml-portfolio](https://github.com/Dilip-Git18/ml-portfolio)**
 ---
 
 ## ✨ Features
