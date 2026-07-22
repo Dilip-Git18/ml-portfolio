@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Dilip Kumar — Portfolio Website 💻🤖
+# 🚀 Dilip Kumar | ML Portfolio Website
 
 ### Machine Learning Enthusiast • Aspiring Full-Stack Developer • B.Tech CSE Student
 
